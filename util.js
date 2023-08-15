@@ -1,10 +1,15 @@
 // pure function
 let parentid = 0;
-
-// function for creating unique id 
 function unique_id() {
     parentid++;
     return parentid;
+}
+
+function checkFileName(event) {
+    const regex = /^(?!.{11,})[a-zA-Z0-9]*$/;
+    if (!fileName.match(regex)) {
+        window.alert("File name should be less than 10 char & it should not contain number!!")
+    }
 }
 
 // functions for creating button and icons 
@@ -128,8 +133,6 @@ const checkClassCollapse = (event) => {
         event.classList.add("rotate");
         event.classList.remove("normal")
     }
-
-
 }
 
 

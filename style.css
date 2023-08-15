@@ -33,8 +33,17 @@ span.normal {
     -webkit-transform: rotate(00deg);
 }
 
+#main_section {
+    margin-top: 10px;
+    font-size: 25px;
+}
+
 .main {
     display: flex;
+}
+
+#main {
+    font-size: 20px;
 }
 
 .icons {

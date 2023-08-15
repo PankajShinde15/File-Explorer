@@ -1,5 +1,5 @@
 // impure function
-const iterateChikderenToPrint = (main_div, children) => {
+const iterateChilderenToPrint = (main_div, children) => {
 
     for (let obj of children) {
         let addingdiv
@@ -11,7 +11,7 @@ const iterateChikderenToPrint = (main_div, children) => {
         }
         main_div.appendChild(addingdiv);
         if (obj.children != null) {
-            iterateChikderenToPrint(addingdiv, obj.children)
+            iterateChilderenToPrint(addingdiv, obj.children)
         }
     }
 }
@@ -59,7 +59,7 @@ const onFolderClick = (event) => {
     // console.log(arrayOfChildren)
     for (let obj of arrayOfChildren) {
         if (obj.name === inputValue.value) {
-            alert("The given name is already exist");
+            alert("Folder with given name is already exist");
             return;
         }
     }
@@ -71,7 +71,7 @@ const onFolderClick = (event) => {
     main_div.innerHTML = '';
     parentid = 0;
 
-    iterateChikderenToPrint(main_div, data[0].children)
+    iterateChilderenToPrint(main_div, data[0].children)
 }
 
 const onFileClick = (event) => {
@@ -86,7 +86,7 @@ const onFileClick = (event) => {
     let main_div = document.getElementById("main");
     main_div.innerHTML = '';
     parentid = 0;
-    iterateChikderenToPrint(main_div, data[0].children)
+    iterateChilderenToPrint(main_div, data[0].children)
 }
 
 const onDeleteClick = (event) => {
@@ -95,5 +95,5 @@ const onDeleteClick = (event) => {
     let main_div = document.getElementById("main");
     main_div.innerHTML = '';
     parentid = 0;
-    iterateChikderenToPrint(main_div, data[0].children)
+    iterateChilderenToPrint(main_div, data[0].children)
 }
