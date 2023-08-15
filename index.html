@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Explorer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="store.js"></script>
+    <script src="util.js"></script>
+    <script src="operation.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body onload="myFunction()">
+    <h1>File Explorer</h1>
+    <input type="text" id="InputValueId" oninput="checkFileName(this)">
+    <br>
+    <section id="main_section">
+        <span class="rotate" onclick="checkClassCollapse(this)"> &#9205;</span>
+        <span>Root</span>
+        <button class="icons" id="addFolder" style="cursor: pointer;" onclick="onFolderClick(this)"> &#128193;</button>
+        <button class="icons" id="addFile" style="cursor: pointer;" onclick="onFileClick(this)">&#128196;</button>
+        <button class="icons" id="deletebutton1" style="cursor: pointer;" onclick="onDeleteClick(this)">
+            &#x2715;</button>
+        <div id="main">
+
+        </div>
+    </section>
+</body>
+
+</html>

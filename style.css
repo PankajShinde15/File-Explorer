@@ -1,0 +1,44 @@
+h1 {
+    font-family: 'Mukta', sans-serif;
+    text-align: center;
+}
+
+#InputValueId {
+    border: solid;
+    border-radius: 21px;
+    width: 150px;
+    height: 30px;
+}
+
+.collapse {
+    display: none;
+}
+
+span.rotate {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    display: inline-block;
+}
+
+span.normal {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transform: rotate(00deg);
+    -ms-transform: rotate(00deg);
+    -webkit-transform: rotate(00deg);
+}
+
+.main {
+    display: flex;
+}
+
+.icons {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
