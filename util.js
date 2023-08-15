@@ -118,28 +118,45 @@ function createFolder(name, obj) {
     main_div.appendChild(children_div)
     return main_div;
 }
-
 const checkClassCollapse = (event) => {
-    let lastchild = event.parentNode.lastElementChild;
-    console.log(lastchild)
+    let parentElement = event.parentNode;
+    let childElements = parentElement.children;
 
-    if (lastchild.classList.length == 0) {
-        lastchild.classList.add("collapse");
-        event.classList.remove("rotate");
-        event.classList.add("normal")
+    console.log(childElements[childElements.length - 1])
+    let targetNode = childElements[childElements.length - 1]
+    // let isCollapsed = false;
+
+    // for (let i = 0; i < childElements.length; i++) {
+    //     let childElement = childElements[i];
+
+    //     if (childElement === event) {
+    //         // Skip the clicked element itself
+    //         continue;
+    //     }
+
+    //     if (childElement.classList.contains("collapse")) {
+    //         childElement.classList.remove("collapse");
+    //         isCollapsed = false;
+    //     } else {
+    //         childElement.classList.add("collapse");
+    //         isCollapsed = true;
+    //     }
+    // }
+
+    // if (isCollapsed) {
+    //     event.classList.remove("rotate");
+    //     event.classList.add("normal");
+    // } else {
+    //     event.classList.add("rotate");
+    //     event.classList.remove("normal");
+    // }
+
+    if (targetNode.classList.contains("collapse")) {
+        targetNode.classList.remove("collapse");
+        targetNode.classList.add("rotate");
     }
     else {
-        lastchild.classList.remove("collapse")
-        event.classList.add("rotate");
-        event.classList.remove("normal")
+        targetNode.classList.add("collapse");
+        targetNode.classList.remove("rotate");
     }
 }
-
-
-
-
-
-
-
-
-
