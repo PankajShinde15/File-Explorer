@@ -13,8 +13,29 @@ function checkFileName(fileName) {
     return true;
 }
 
+const createNode = (parentObj, itemName, itemType) => {
+    if (itemType == "folder") {
+        let newObj = {
+            type: itemType,
+            name: itemName,
+            id: "FolderId" + unique_id(),
+            children: [],
+            level: (parentObj.level) + 1
+        }
+        return newObj;
+    }
+    else if (itemType == "file") {
+        let newObj = {
+            type: itemType,
+            name: itemName,
+            id: "FileId" + unique_id(),
+            children: null,
+            level: parentObj.level + 1
+        }
+        return newObj;
+    }
+}
 
-// functions for creating button and icons 
 function creating_arrow() {
     let arrow = document.createElement("span");
     arrow.classList.add("rotate")
@@ -42,29 +63,6 @@ function creating_buttons() {
     return { folder_button, file_button, delete_button };
 }
 
-// functions for performing operation on list
-const createNode = (parentObj, itemName, itemType) => {
-    if (itemType == "folder") {
-        let newObj = {
-            type: itemType,
-            name: itemName,
-            id: "FolderId" + unique_id(),
-            children: [],
-            level: (parentObj.level) + 1
-        }
-        return newObj;
-    }
-    else if (itemType == "file") {
-        let newObj = {
-            type: itemType,
-            name: itemName,
-            id: "FileId" + unique_id(),
-            children: null,
-            level: parentObj.level + 1
-        }
-        return newObj;
-    }
-}
 
 const deleteNode = (id, childrenArray, deleteId) => {
     if (id === "main") {
@@ -91,9 +89,11 @@ function createFile(name, obj) {
     main_div.id = unique_id();
     main_div.style.paddingLeft = ((obj.level) * 10) + "px";
 
-    main_div.innerHTML = name;
+    let file_name = document.createElement("span");
+    file_name.innerHTML = name;
     let { delete_button } = creating_buttons();
 
+    main_div.append(file_name)
     main_div.appendChild(delete_button)
     return main_div
 }

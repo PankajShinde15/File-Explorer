@@ -104,6 +104,7 @@ const onFileClick = (event) => {
 }
 
 const onDeleteClick = (event) => {
+    console.log(event.parentNode)
     let parentId = event.parentNode.parentNode.id;
     deleteNode(parentId, objStructure, event.parentNode.id)
     let main_div = document.getElementById("main");
