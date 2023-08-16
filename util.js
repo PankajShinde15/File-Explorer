@@ -33,8 +33,9 @@ function creating_buttons() {
     file_button.setAttribute("onclick", "onFileClick(this)")
 
     let delete_button = document.createElement("button")
-    delete_button.innerHTML = " &#x2715;"
+    delete_button.innerHTML = " &#x1F5D1;"
     delete_button.classList.add("icons")
+    delete_button.style.color = "red"
     delete_button.setAttribute("onclick", "onDeleteClick(this)")
 
     return { folder_button, file_button, delete_button };
@@ -119,44 +120,17 @@ function createFolder(name, obj) {
     return main_div;
 }
 const checkClassCollapse = (event) => {
-    let parentElement = event.parentNode;
-    let childElements = parentElement.children;
+    let lastchild = event.parentNode.lastElementChild;
+    console.log(lastchild)
 
-    console.log(childElements[childElements.length - 1])
-    let targetNode = childElements[childElements.length - 1]
-    // let isCollapsed = false;
-
-    // for (let i = 0; i < childElements.length; i++) {
-    //     let childElement = childElements[i];
-
-    //     if (childElement === event) {
-    //         // Skip the clicked element itself
-    //         continue;
-    //     }
-
-    //     if (childElement.classList.contains("collapse")) {
-    //         childElement.classList.remove("collapse");
-    //         isCollapsed = false;
-    //     } else {
-    //         childElement.classList.add("collapse");
-    //         isCollapsed = true;
-    //     }
-    // }
-
-    // if (isCollapsed) {
-    //     event.classList.remove("rotate");
-    //     event.classList.add("normal");
-    // } else {
-    //     event.classList.add("rotate");
-    //     event.classList.remove("normal");
-    // }
-
-    if (targetNode.classList.contains("collapse")) {
-        targetNode.classList.remove("collapse");
-        targetNode.classList.add("rotate");
+    if (lastchild.classList.length == 0) {
+        lastchild.classList.add("collapse");
+        event.classList.remove("rotate");
+        event.classList.add("normal")
     }
     else {
-        targetNode.classList.add("collapse");
-        targetNode.classList.remove("rotate");
+        lastchild.classList.remove("collapse")
+        event.classList.add("rotate");
+        event.classList.remove("normal")
     }
 }

@@ -1,6 +1,5 @@
 // impure function
 const iterateChilderenToPrint = (main_div, children) => {
-
     for (let obj of children) {
         let addingdiv
         if (obj.type === "file") {
@@ -11,7 +10,7 @@ const iterateChilderenToPrint = (main_div, children) => {
         }
         main_div.appendChild(addingdiv);
         if (obj.children != null) {
-            iterateChilderenToPrint(addingdiv, obj.children)
+            iterateChilderenToPrint(addingdiv.lastElementChild, obj.children)
         }
     }
 }
@@ -41,22 +40,21 @@ const iterateForParentObj = (findId, children) => {
             ans = iterateForParentObj(findId, obj.children);
             if (ans) {
                 // console.log(obj)
-                return ans; // Return the answer if found in deeper levels
+                return ans;
             }
         }
     }
-    return null; // Return null if not found
+    return null;
 }
 
 
 // Actions Function 
 const onFolderClick = (event) => {
     let inputValue = document.getElementById("InputValueId");
-    let parentObj = iterateForParentObj(event.parentNode.id, data);
+    let parentObj = iterateForParentObj(event.parentNode.id, objStructure);
 
     let arrayOfChildren = parentObj.children;
 
-    // console.log(arrayOfChildren)
     for (let obj of arrayOfChildren) {
         if (obj.name === inputValue.value) {
             alert("Folder with given name is already exist");
@@ -65,35 +63,35 @@ const onFolderClick = (event) => {
     }
     let newobj = createFolderNode(parentObj, inputValue.value, "folder");
 
-    iterateChildrenAndPush(parentObj.id, data, newobj);
+    iterateChildrenAndPush(parentObj.id, objStructure, newobj);
 
     let main_div = document.getElementById("main");
     main_div.innerHTML = '';
     parentid = 0;
 
-    iterateChilderenToPrint(main_div, data[0].children)
+    iterateChilderenToPrint(main_div, objStructure[0].children)
 }
 
 const onFileClick = (event) => {
     let inputValue = document.getElementById("InputValueId");
 
-    let parentObj = iterateForParentObj(event.parentNode.id, data);
+    let parentObj = iterateForParentObj(event.parentNode.id, objStructure);
     let newobj = createFileNode(parentObj, inputValue.value, "file");
 
-    iterateChildrenAndPush(parentObj.id, data, newobj);
+    iterateChildrenAndPush(parentObj.id, objStructure, newobj);
 
     // main section children delete
     let main_div = document.getElementById("main");
     main_div.innerHTML = '';
     parentid = 0;
-    iterateChilderenToPrint(main_div, data[0].children)
+    iterateChilderenToPrint(main_div, objStructure[0].children)
 }
 
 const onDeleteClick = (event) => {
     let parentId = event.parentNode.parentNode.id;
-    deleteNode(parentId, data, event.parentNode.id)
+    deleteNode(parentId, objStructure, event.parentNode.id)
     let main_div = document.getElementById("main");
     main_div.innerHTML = '';
     parentid = 0;
-    iterateChilderenToPrint(main_div, data[0].children)
+    iterateChilderenToPrint(main_div, objStructure[0].children)
 }

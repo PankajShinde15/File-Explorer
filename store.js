@@ -1,6 +1,6 @@
 // refernce of state
 
-let data = [
+let objStructure = [
     {
         type:"folder",
         name:"Root",

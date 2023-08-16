@@ -1,13 +1,29 @@
+* {
+    background-color: rgb(226, 230, 230);
+
+}
+
 h1 {
     font-family: 'Mukta', sans-serif;
     text-align: center;
+    background-color: aqua;
+    padding: 5px;
+    border-radius: 25px;
+    text-decoration: underline;
 }
 
 #InputValueId {
     border: solid;
-    border-radius: 21px;
-    width: 150px;
+    border-radius: 20px;
+    width: 200px;
     height: 30px;
+    font-size: 20px;
+    text-align: center;
+    background-color: azure;
+}
+
+#InputValueId::placeholder {
+    font-size: 15px;
 }
 
 .collapse {
@@ -50,4 +66,15 @@ span.normal {
     background: none;
     border: none;
     cursor: pointer;
+    margin: 4px;
+    padding: 0;
+}
+
+#deletebutton1 {
+    font-size: 15px;
+    color: red;
+}
+
+#root~#deletebutton1 {
+    display: none;
 }

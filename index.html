@@ -14,15 +14,15 @@
 
 <body onload="functionOnLoad()">
     <h1>File Explorer</h1>
-    <input type="text" id="InputValueId" oninput="checkFileName(this)">
+    <input type="text" id="InputValueId" oninput="checkFileName(this)" placeholder="Enter File/Folder Name">
     <br>
     <section id="main_section">
         <span class="rotate" onclick="checkClassCollapse(this)"> &#9205;</span>
-        <span>Root</span>
+        <span id="root">Root</span>
         <button class="icons" id="addFolder" style="cursor: pointer;" onclick="onFolderClick(this)"> &#128193;</button>
         <button class="icons" id="addFile" style="cursor: pointer;" onclick="onFileClick(this)">&#128196;</button>
         <button class="icons" id="deletebutton1" style="cursor: pointer;" onclick="onDeleteClick(this)">
-            &#x2715;</button>
+            &#x1F5D1;</button>
         <div id="main">
 
         </div>
