@@ -1,20 +1,28 @@
 * {
-    background-color: rgb(226, 230, 230);
-
+    font-family: 'Mukta', sans-serif;
+    background-color: rgb(186, 190, 190);
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
-    font-family: 'Mukta', sans-serif;
     text-align: center;
-    background-color: aqua;
-    padding: 5px;
-    border-radius: 25px;
+    background-color: black;
+    color: white;
+    padding: 10px;
     text-decoration: underline;
+}
+
+.inputbtn {
+    margin-left: 15px;
+    font-size: 18px;
 }
 
 #InputValueId {
     border: solid;
     border-radius: 20px;
+    margin-top: 15px;
+    margin-left: 5px;
     width: 200px;
     height: 30px;
     font-size: 20px;
@@ -50,7 +58,7 @@ span.normal {
 }
 
 #main_section {
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 25px;
 }
 
@@ -62,19 +70,27 @@ span.normal {
     font-size: 20px;
 }
 
-.icons {
-    background: none;
+.folderIcon {
     border: none;
     cursor: pointer;
-    margin: 4px;
-    padding: 0;
+    font-size: 18px;
+    margin: 0 5px;
 }
 
-#deletebutton1 {
-    font-size: 15px;
-    color: red;
+.fileIcon {
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    margin: 0 5px;
 }
 
-#root~#deletebutton1 {
+.deleteIcon {
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+#root~#deletebutton {
     display: none;
 }

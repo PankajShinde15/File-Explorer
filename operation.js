@@ -1,45 +1,43 @@
 // impure function
 const iterateChilderenToPrint = (main_div, children) => {
     for (let obj of children) {
-        let addingdiv
+        let tempDiv;
         if (obj.type === "file") {
-            addingdiv = createFile(obj.name, obj);
+            tempDiv = createFile(obj.name, obj);
         }
         else {
-            addingdiv = createFolder(obj.name, obj);
+            tempDiv = createFolder(obj.name, obj);
         }
-        main_div.appendChild(addingdiv);
+        main_div.appendChild(tempDiv);
         if (obj.children != null) {
-            iterateChilderenToPrint(addingdiv.lastElementChild, obj.children)
+            iterateChilderenToPrint(tempDiv.lastElementChild, obj.children)
         }
     }
 }
 
-const iterateChildrenAndPush = (findId, children, newObject) => {
-
+const iterateChildrenAndPush = (Id, children, newObject) => {
     for (let obj of children) {
-        if (findId === obj.id) {
+        if (Id === obj.id) {
             obj.children.push(newObject)
             return;
         }
 
         if (obj.children != null) {
-            iterateChildrenAndPush(findId, obj.children, newObject);
+            iterateChildrenAndPush(Id, obj.children, newObject);
         }
     }
 }
 
-const iterateForParentObj = (findId, children) => {
+const iterateForParentObj = (Id, children) => {
     let ans;
     for (let obj of children) {
-        if (findId == obj.id) {
+        if (Id == obj.id) {
             return obj;
         }
 
         if (obj.children != null) {
-            ans = iterateForParentObj(findId, obj.children);
+            ans = iterateForParentObj(Id, obj.children);
             if (ans) {
-                // console.log(obj)
                 return ans;
             }
         }
@@ -51,17 +49,22 @@ const iterateForParentObj = (findId, children) => {
 // Actions Function 
 const onFolderClick = (event) => {
     let inputValue = document.getElementById("InputValueId");
+    if (!checkFileName(inputValue.value)) {
+        window.alert("File name should be between 1 and 10 characters and can only contain letters and numbers.");
+        return;
+    }
     let parentObj = iterateForParentObj(event.parentNode.id, objStructure);
 
     let arrayOfChildren = parentObj.children;
 
     for (let obj of arrayOfChildren) {
         if (obj.name === inputValue.value) {
-            alert("Folder with given name is already exist");
+            alert("File/Folder with given name is already exist");
             return;
         }
     }
-    let newobj = createFolderNode(parentObj, inputValue.value, "folder");
+
+    let newobj = createNode(parentObj, inputValue.value, "folder");
 
     iterateChildrenAndPush(parentObj.id, objStructure, newobj);
 
@@ -74,9 +77,22 @@ const onFolderClick = (event) => {
 
 const onFileClick = (event) => {
     let inputValue = document.getElementById("InputValueId");
-
+    if (!checkFileName(inputValue.value)) {
+        window.alert("File name should be between 1 and 10 characters and can only contain letters and numbers.");
+        return;
+    }
     let parentObj = iterateForParentObj(event.parentNode.id, objStructure);
-    let newobj = createFileNode(parentObj, inputValue.value, "file");
+
+    let childrenArray = parentObj.children;
+
+    for (let child of childrenArray) {
+        if (child.name === inputValue.value) {
+            alert("File/Folder with given name is already exist");
+            return;
+        }
+    }
+
+    let newobj = createNode(parentObj, inputValue.value, "file");
 
     iterateChildrenAndPush(parentObj.id, objStructure, newobj);
 

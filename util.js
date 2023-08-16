@@ -5,12 +5,14 @@ function unique_id() {
     return parentid;
 }
 
-function checkFileName(event) {
-    const regex = /^(?!.{11,})[a-zA-Z0-9]*$/;
+function checkFileName(fileName) {
+    const regex = /^[a-zA-Z0-9]{1,10}$/;
     if (!fileName.match(regex)) {
-        window.alert("File name should be less than 10 char & it should not contain number!!")
+        return false;
     }
+    return true;
 }
+
 
 // functions for creating button and icons 
 function creating_arrow() {
@@ -24,44 +26,44 @@ function creating_arrow() {
 function creating_buttons() {
     let folder_button = document.createElement("button");
     folder_button.innerHTML = "&#128193;";
-    folder_button.classList.add("icons")
+    folder_button.classList.add("folderIcon")
     folder_button.setAttribute("onclick", "onFolderClick(this)")
 
     let file_button = document.createElement("button")
     file_button.innerHTML = "&#128196;"
-    file_button.classList.add("icons")
+    file_button.classList.add("fileIcon")
     file_button.setAttribute("onclick", "onFileClick(this)")
 
     let delete_button = document.createElement("button")
-    delete_button.innerHTML = " &#x1F5D1;"
-    delete_button.classList.add("icons")
-    delete_button.style.color = "red"
+    delete_button.innerHTML = "&#9587;"
+    delete_button.classList.add("deleteIcon")
     delete_button.setAttribute("onclick", "onDeleteClick(this)")
 
     return { folder_button, file_button, delete_button };
 }
 
 // functions for performing operation on list
-function createFileNode(parentObj, fileName, fileType) {
-    let newObj = {
-        type: fileType,
-        name: fileName,
-        id: "FileId" + unique_id(),
-        children: null,
-        level: parentObj.level + 1
+const createNode = (parentObj, itemName, itemType) => {
+    if (itemType == "folder") {
+        let newObj = {
+            type: itemType,
+            name: itemName,
+            id: "FolderId" + unique_id(),
+            children: [],
+            level: (parentObj.level) + 1
+        }
+        return newObj;
     }
-    return newObj;
-}
-
-const createFolderNode = (parentObj, folderName, folderType) => {
-    let newObj = {
-        type: folderType,
-        name: folderName,
-        id: "FolderId" + unique_id(),
-        children: [],
-        level: (parentObj.level) + 1
+    else if (itemType == "file") {
+        let newObj = {
+            type: itemType,
+            name: itemName,
+            id: "FileId" + unique_id(),
+            children: null,
+            level: parentObj.level + 1
+        }
+        return newObj;
     }
-    return newObj;
 }
 
 const deleteNode = (id, childrenArray, deleteId) => {
@@ -81,7 +83,6 @@ const deleteNode = (id, childrenArray, deleteId) => {
             deleteNode(id, childrenArray[i].children, deleteId);  // Recursively search nested children
         }
     }
-
 }
 
 // functions for performing operation on DOM
@@ -89,8 +90,10 @@ function createFile(name, obj) {
     let main_div = document.createElement("div");
     main_div.id = unique_id();
     main_div.style.paddingLeft = ((obj.level) * 10) + "px";
+
     main_div.innerHTML = name;
     let { delete_button } = creating_buttons();
+
     main_div.appendChild(delete_button)
     return main_div
 }
@@ -112,13 +115,13 @@ function createFolder(name, obj) {
     main_div.appendChild(file_button);
     main_div.appendChild(delete_button);
 
-    // for appending children
     let children_div = document.createElement("div");
     children_div.id = unique_id();
 
     main_div.appendChild(children_div)
     return main_div;
 }
+
 const checkClassCollapse = (event) => {
     let lastchild = event.parentNode.lastElementChild;
     console.log(lastchild)
