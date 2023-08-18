@@ -1,4 +1,0 @@
-1. Add Folder Button: onFolderClick() (gets input text, finds parent object, gets children array of that parent object, 
-create a folder node with given input value, push this new object in the children array of its parent,  display on the page(calls createfolder which will append this to parent and show on screen))
-
-2. Add File Button: onFileClick() (gets input text, finds parent object, gets children array of that parent object,)
