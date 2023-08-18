@@ -124,6 +124,15 @@ function addFolder(elem) {
         window.alert("File name should be between 1 and 10 characters and can only contain letters and numbers.");
         return;
     }
+
+    let arrayOfChildren = findParentObj(StateStore.state, elem.parentNode.id, StateStore.state).children
+    for (let obj of arrayOfChildren) {
+        if (obj.name === inputValue.value) {
+            alert("File/Folder with given name is already exist");
+            return;
+        }
+    }
+
     let parentNodeID = elem.parentNode.id;
     let parentNode = findObj(StateStore.state, parentNodeID);
     console.log("ParentNode:", parentNode)
@@ -149,6 +158,15 @@ function addFile(elem) {
         window.alert("File name should be between 1 and 10 characters and can only contain letters and numbers.");
         return;
     }
+
+    let arrayOfChildren = findParentObj(StateStore.state, elem.parentNode.id, StateStore.state).children
+    for (let obj of arrayOfChildren) {
+        if (obj.name === inputValue.value) {
+            alert("File/Folder with given name is already exist");
+            return;
+        }
+    }
+
     let parentNodeID = elem.parentNode.id;
     let parentNode = findObj(StateStore.state, parentNodeID);
     console.log("ParentNode:", parentNode)
