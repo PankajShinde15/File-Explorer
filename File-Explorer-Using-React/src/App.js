@@ -5,13 +5,10 @@ function App() {
   const [fileExplorer, setFileExplorer] = useState([
     {
       id: 'id1',
-      // key: 0,
-      level: 0,
       parentNodeId: -1,
       name: "root",
       type: "folder",
       children: [],
-      visible: true
     }
   ]);
   return (

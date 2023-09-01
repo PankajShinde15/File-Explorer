@@ -1,38 +1,36 @@
 import FolderComponent from '../FolderComponent/FolderComponent'
 import FileComponent from '../FileComponent/FileComponent'
-
 let uniqueId = -1;
 const generateUniqueId = () => {
     uniqueId++;
     return uniqueId;
 }
 
-const MainDiv = ({ data, store, name, setName, setData }) => {
-    const addFolder = (storeData, id) => {
+const MainDiv = (props) => {
+    const addFolder = (stateStore, id) => {
         let newObj = {
             id: generateUniqueId(),
             parentNodeId: id,
-            name: name,
+            name: props.name,
             children: [],
-            visible: true,
             type: "folder",
         };
-        storeData.forEach((elem) => {
-            let duplicateName = false;
+        stateStore.forEach((elem) => {
+            let nameExist = false;
             if (elem.id === id) {
                 elem.children.forEach((elem) => {
-                    if (elem.name === name) {
+                    if (elem.name === props.name) {
                         window.alert("Folder Already Exist With Given Name!");
-                        duplicateName = true;
+                        nameExist = true;
                     }
                 });
-                if (name === " " || name === "") {
+                if (props.name === " " || props.name === "") {
                     window.alert("Please Enter Folder Name")
                 }
-                else if (!duplicateName) {
+                else if (!nameExist) {
                     elem.children.push(newObj);
                 }
-                setName("");
+                props.setName("");
             }
 
             else if (elem.children) {
@@ -41,31 +39,30 @@ const MainDiv = ({ data, store, name, setName, setData }) => {
         });
     };
 
-    const addFile = (storeData, id) => {
+    const addFile = (stateStore, id) => {
         let newObj = {
             id: generateUniqueId(),
             parentNodeId: id,
-            name: name,
+            name: props.name,
             children: null,
-            visible: true,
             type: "file",
         };
-        storeData.forEach((elem) => {
-            let duplicateName = false;
+        stateStore.forEach((elem) => {
+            let nameExist = false;
             if (elem.id === id) {
                 elem.children.forEach((elem) => {
-                    if (elem.name === name) {
+                    if (elem.name === props.name) {
                         window.alert("File Already Exist With Given Name!");
-                        duplicateName = true;
+                        nameExist = true;
                     }
                 });
-                if (name === " " || name === "") {
+                if (props.name === " " || props.name === "") {
                     window.alert("Please Enter File Name")
                 }
-                else if (!duplicateName) {
+                else if (!nameExist) {
                     elem.children.push(newObj);
                 }
-                setName("");
+                props.setName("");
             }
 
             else if (elem.children) {
@@ -74,14 +71,12 @@ const MainDiv = ({ data, store, name, setName, setData }) => {
         });
     };
 
-    const deleteElem = (storeData, id, parentNodeId) => {
-        let root = false;
+    const deleteElem = (stateStore, id, parentNodeId) => {
         if (id === 'id1') {
-            root = true;
             window.alert("Root cannot be Deleted!");
         }
-        if (!root) {
-            storeData.forEach((elem) => {
+        else {
+            stateStore.forEach((elem) => {
                 if (elem.id === parentNodeId) {
                     let children = elem.children;
                     for (let i = 0; i < children.length; i++) {
@@ -90,7 +85,7 @@ const MainDiv = ({ data, store, name, setName, setData }) => {
                         }
                     }
                     elem.children = children;
-                    setData([...store]);
+                    props.setData([...props.store]);
                 }
                 if (elem.children !== null) {
                     deleteElem(elem.children, id, parentNodeId);
@@ -101,43 +96,21 @@ const MainDiv = ({ data, store, name, setName, setData }) => {
 
     return (
         <div>
-            {data.map((elem) =>
+            {props.data.map((elem) =>
                 elem.type === "folder" ? (
                     <div style={{ paddingLeft: "20px" }}>
-                        {elem.visible && (
-                            <FolderComponent
-                                folderData={elem}
-                                data={data}
-                                name={name}
-                                setData={setData}
-                                addFolder={addFolder}
-                                addFile={addFile}
-                                store={store}
-                                deleteElem={deleteElem}
-                            />
-                        )}
+                        {
+                            <FolderComponent folderData={elem} data={props.data} name={props.name} setData={props.setData} addFolder={addFolder} addFile={addFile} store={props.store} deleteElem={deleteElem} />
+                        }
                         {elem.children && (
-                            <MainDiv
-                                data={elem.children}
-                                store={store}
-                                name={name}
-                                setName={setName}
-                                setData={setData}
-                            />
+                            <MainDiv data={elem.children} store={props.store} name={props.name} setName={props.setName} setData={props.setData} />
                         )}
                     </div>
                 ) : (
                     <div style={{ paddingLeft: "20px" }}>
-                        {elem.visible && (
-                            <FileComponent
-                                fileData={elem}
-                                store={store}
-                                name={name}
-                                data={data}
-                                setData={setData}
-                                deleteElem={deleteElem}
-                            />
-                        )}
+                        {
+                            <FileComponent fileData={elem} store={props.store} name={props.name} data={props.data} setData={props.setData} deleteElem={deleteElem} />
+                        }
                     </div>
                 )
             )}

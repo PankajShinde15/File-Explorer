@@ -6,14 +6,8 @@ const File = (props) => {
             <span
                 className="deleteBtn"
                 onClick={() =>
-                    props.deleteElem(
-                        props.store,
-                        props.fileData.id,
-                        props.fileData.parentNodeId
-                    )
-                }
-            >
-                &#x2715;
+                    props.deleteElem(props.store, props.fileData.id, props.fileData.parentNodeId)}
+            >&#x2715;
             </span>
         </div>
     );
