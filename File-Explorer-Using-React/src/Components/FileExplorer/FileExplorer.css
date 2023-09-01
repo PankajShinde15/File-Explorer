@@ -1,0 +1,11 @@
+.Main {
+    padding: 2px;
+}
+
+.heading {
+    text-align: center;
+    border: 2px solid white;
+    background-color: black;
+    color: white;
+    height: 50px;
+}

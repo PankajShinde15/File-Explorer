@@ -1,0 +1,24 @@
+.folderWrapper {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.folderWrapper span {
+    margin-right: 10px;
+}
+
+.createFolderBtn,
+.createFileBtn,
+.deleteBtn {
+    cursor: pointer;
+}
+
+.deleteBtn:hover {
+    color: red;
+}
+
