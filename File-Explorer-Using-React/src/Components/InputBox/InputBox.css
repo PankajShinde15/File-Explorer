@@ -1,0 +1,31 @@
+.InputDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    font-size: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid black;
+  }
+  
+  #InputBox {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    width: 250px;
+    font-size: 16px;
+    height: 40px;
+    margin-left: 10px;
+    text-align: center;
+  }
+  
+  #InputBox:focus {
+    border-color: #007bff; /* Change the border color when input is focused */
+    outline: none; /* Remove the default blue outline */
+  }
+  
+  #error {
+    color: red;
+    margin-top: 5px;
+  }
+  
