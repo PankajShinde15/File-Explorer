@@ -7,8 +7,6 @@ const InputBox = (props) => {
                 props.setName(event.target.value);
             }}
             />
-
-            <span id="error"></span>
         </div>
 
     );
