@@ -9,7 +9,8 @@
 
 .createFolderBtn,
 .createFileBtn,
-.deleteBtn {
+.deleteBtn,
+.renameBtn {
     cursor: pointer;
     margin-left: 10px;
 }

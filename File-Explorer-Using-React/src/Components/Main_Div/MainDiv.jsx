@@ -14,7 +14,7 @@ const MainDiv = (props) => {
             name: props.name,
             children: [],
             type: "folder",
-            toggle:true
+            toggle: true
         };
         stateStore.forEach((elem) => {
             let nameExist = false;
@@ -47,7 +47,7 @@ const MainDiv = (props) => {
             name: props.name,
             children: null,
             type: "file",
-            toggle:true
+            toggle: true
         };
         stateStore.forEach((elem) => {
             let nameExist = false;
@@ -110,13 +110,53 @@ const MainDiv = (props) => {
 
     }
 
+
+    const renameItem = (stateStore, ItemData) => {
+        if (ItemData.id = 'id1') {
+            let newInput = prompt("Enter New Name: ")
+            if (newInput === " " || newInput === "") {
+                window.alert("Name cannot be empty")
+            }
+            else {
+                ItemData.name = newInput
+            }
+        }
+        else {
+            stateStore.forEach((elem) => {
+                let nameExist = false;
+                console.log("ParentId", ItemData.parentNodeId)
+                if (elem.id === ItemData.parentNodeId) {
+                    let newInput = prompt("Enter New Name: ")
+                    elem.children.forEach((elem) => {
+                        if (elem.name === newInput) {
+                            window.alert("File Already Exist With Given Name!");
+                            nameExist = true;
+                        }
+                    });
+                    if (newInput === " " || newInput === "") {
+                        window.alert("Name cannot be empty")
+                    }
+                    else if (!nameExist) {
+                        ItemData.name = newInput
+                    }
+                }
+                else if (elem.children != [] && elem.type === 'folder') {
+                    renameItem(elem.children, ItemData)
+                }
+
+            });
+        }
+
+        props.setData([...props.store])
+    }
+
     return (
         <div>
             {props.data.map((elem) =>
-                elem.type === "folder"  ? (
+                elem.type === "folder" ? (
                     <div style={{ paddingLeft: "20px" }}>
                         {
-                            elem.toggle && <FolderComponent folderData={elem} data={props.data} name={props.name} setData={props.setData} addFolder={addFolder} addFile={addFile} store={props.store} deleteElem={deleteElem} toggleFolder={toggleFolder} />
+                            elem.toggle && <FolderComponent folderData={elem} data={props.data} name={props.name} setData={props.setData} addFolder={addFolder} addFile={addFile} store={props.store} deleteElem={deleteElem} toggleFolder={toggleFolder} renameItem={renameItem} />
                         }
                         {elem.children && (
                             <MainDiv data={elem.children} store={props.store} name={props.name} setName={props.setName} setData={props.setData} />
@@ -125,7 +165,7 @@ const MainDiv = (props) => {
                 ) : (
                     <div style={{ paddingLeft: "20px" }}>
                         {
-                            elem.toggle && <FileComponent fileData={elem} store={props.store} name={props.name} data={props.data} setData={props.setData} deleteElem={deleteElem} />
+                            elem.toggle && <FileComponent fileData={elem} store={props.store} name={props.name} data={props.data} setData={props.setData} deleteElem={deleteElem} renameItem={renameItem} />
                         }
                     </div>
                 )

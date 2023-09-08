@@ -39,6 +39,13 @@ const Folder = (props) => {
                 >
                     &#x2715;
                 </span>
+
+                <span
+                    className='renameBtn'
+                    onClick={() => props.renameItem(props.store, props.folderData)}>
+
+                    &#9998;
+                </span>
             </span>
 
         </div >

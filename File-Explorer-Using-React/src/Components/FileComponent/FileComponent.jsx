@@ -9,6 +9,12 @@ const File = (props) => {
                     props.deleteElem(props.store, props.fileData.id, props.fileData.parentNodeId)}
             >&#x2715;
             </span>
+            <span
+                className='renameBtn'
+                onClick={() => props.renameItem(props.store, props.fileData)}>
+
+                &#9998;
+            </span>
         </div>
     );
 }
