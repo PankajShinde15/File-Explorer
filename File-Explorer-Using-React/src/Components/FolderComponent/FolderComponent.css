@@ -6,17 +6,37 @@
     margin: 10px;
 }
 
-.folderWrapper span {
-    margin-right: 10px;
-}
 
 .createFolderBtn,
 .createFileBtn,
 .deleteBtn {
     cursor: pointer;
+    margin-left: 10px;
 }
 
 .deleteBtn:hover {
     color: red;
 }
 
+.toggleBtn {
+    margin-right: 3px;
+}
+
+.rotate {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    display: inline-block;
+}
+
+.normal {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transform: rotate(00deg);
+    -ms-transform: rotate(00deg);
+    -webkit-transform: rotate(00deg);
+}

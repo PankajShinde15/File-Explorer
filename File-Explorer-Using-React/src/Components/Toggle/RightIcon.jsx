@@ -1,0 +1,6 @@
+
+const RightIcon=(props)=>{
+    return{
+        
+    }
+}

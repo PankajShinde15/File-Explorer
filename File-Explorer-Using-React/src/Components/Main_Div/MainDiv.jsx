@@ -14,6 +14,7 @@ const MainDiv = (props) => {
             name: props.name,
             children: [],
             type: "folder",
+            toggle:true
         };
         stateStore.forEach((elem) => {
             let nameExist = false;
@@ -46,6 +47,7 @@ const MainDiv = (props) => {
             name: props.name,
             children: null,
             type: "file",
+            toggle:true
         };
         stateStore.forEach((elem) => {
             let nameExist = false;
@@ -94,13 +96,27 @@ const MainDiv = (props) => {
         }
     };
 
+    const toggleFolder = (folderData, id) => {
+        let mainEle, lastchild;
+        folderData.children.forEach((elem) => {
+            elem.toggle = !elem.toggle;
+        })
+        folderData.children.forEach((elem) => {
+            if (elem.type === 'folder' && elem.children.length !== 0) {
+                toggleFolder(elem, id)
+            }
+        });
+        props.setData([...props.store])
+
+    }
+
     return (
         <div>
             {props.data.map((elem) =>
-                elem.type === "folder" ? (
+                elem.type === "folder"  ? (
                     <div style={{ paddingLeft: "20px" }}>
                         {
-                            <FolderComponent folderData={elem} data={props.data} name={props.name} setData={props.setData} addFolder={addFolder} addFile={addFile} store={props.store} deleteElem={deleteElem} />
+                            elem.toggle && <FolderComponent folderData={elem} data={props.data} name={props.name} setData={props.setData} addFolder={addFolder} addFile={addFile} store={props.store} deleteElem={deleteElem} toggleFolder={toggleFolder} />
                         }
                         {elem.children && (
                             <MainDiv data={elem.children} store={props.store} name={props.name} setName={props.setName} setData={props.setData} />
@@ -109,7 +125,7 @@ const MainDiv = (props) => {
                 ) : (
                     <div style={{ paddingLeft: "20px" }}>
                         {
-                            <FileComponent fileData={elem} store={props.store} name={props.name} data={props.data} setData={props.setData} deleteElem={deleteElem} />
+                            elem.toggle && <FileComponent fileData={elem} store={props.store} name={props.name} data={props.data} setData={props.setData} deleteElem={deleteElem} />
                         }
                     </div>
                 )

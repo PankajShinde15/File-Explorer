@@ -9,6 +9,7 @@ function App() {
       name: "root",
       type: "folder",
       children: [],
+      toggle:true
     }
   ]);
   return (

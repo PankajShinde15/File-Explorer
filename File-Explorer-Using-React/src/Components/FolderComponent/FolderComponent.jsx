@@ -1,7 +1,18 @@
+import { useState } from 'react';
 import './FolderComponent.css'
 const Folder = (props) => {
+    const [toggle1, setToggle] = useState(true);
     return (
         <div className="folderWrapper">
+            <span
+                className='toggleBtn'
+                onClick={() => {
+                    props.toggleFolder(props.folderData, props.folderData.id);
+                    setToggle(!toggle1)
+                }}
+            >
+                {toggle1 ? <span className='normal'>&#9205;</span> : <span className='rotate'>&#9205;</span>}
+            </span>
             <span>{props.folderData.name}</span>
             <span>
                 <span
@@ -30,7 +41,7 @@ const Folder = (props) => {
                 </span>
             </span>
 
-        </div>
+        </div >
     );
 }
 
